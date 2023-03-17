@@ -12,18 +12,10 @@ namespace KMA.Lab02.Kucherenko.Models
         private String _lastName;
         private String _email;
         private DateTime _dob;
-        private bool _isAdult;
-        private SunSign _sunSign;
-        private ChineseSign _chineseSign;
-        private bool _isBirthday;
 
         #endregion
 
         #region Constructors
-
-        public Person()
-        {
-        }
 
         public Person(String firstName, String lastName, String email, DateTime dob)
         {
@@ -46,19 +38,19 @@ namespace KMA.Lab02.Kucherenko.Models
 
         #region Properties
 
-        public String FirstName
+        public string FirstName
         {
             get { return _firstName; }
             private set { _firstName = value; }
         }
 
-        public String LastName
+        public string LastName
         {
             get { return _lastName; }
             private set { _lastName = value; }
         }
 
-        public String Email
+        public string Email
         {
             get { return _email; }
             private set { _email = value; }
@@ -92,7 +84,10 @@ namespace KMA.Lab02.Kucherenko.Models
         {
             if (!ValidAge(CalculateAge()))
                 MessageBox.Show("Invalid date of birth");
-            return (DateTime.Now.Day == DateOfBirth.Day) && (DateTime.Now.Month == DateOfBirth.Month);
+            bool isBirthday = DateTime.Now.Day == DateOfBirth.Day && DateTime.Now.Month == DateOfBirth.Month;
+            if (isBirthday)
+                MessageBox.Show("Happy birthday!");
+            return isBirthday;
         }
 
         private bool ValidAge(int age)
