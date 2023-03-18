@@ -54,7 +54,7 @@ namespace KMA.Lab02.Kucherenko.ViewModels
                 {
                     Thread.Sleep(3000);
                     MessageBox.Show(
-                        $"Name: {person.FirstName},\n Surname: {person.LastName},\n Email: {person.Email},\n DateOfBirth: {person.DateOfBirth}," +
+                        $"Name: {person.FirstName},\n Surname: {person.LastName},\n Email: {person.Email},\n DateOfBirth: {person.DateOfBirth.ToShortDateString()}," +
                         $"\n IsAdult: {person.IsAdult},\n ZodiacSign: {person.SunSign},\n ChineseSign: {person.ChineseSign},\n IsBirthday: {person.IsBirthday} ");
                 });
             }
