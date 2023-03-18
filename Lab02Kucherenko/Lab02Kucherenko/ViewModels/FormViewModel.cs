@@ -1,4 +1,4 @@
-﻿using KMA.Lab02.Kucherenko.Models;
+using KMA.Lab02.Kucherenko.Models;
 using KMA.Lab02.Kucherenko.Tools;
 using System;
 using System.ComponentModel;
@@ -54,8 +54,8 @@ namespace KMA.Lab02.Kucherenko.ViewModels
                 {
                     Thread.Sleep(3000);
                     MessageBox.Show(
-                    $"Your data has been proceeded!\n \nName: {FirstName}\nSurname: {LastName}\nEmail: {Email}\nDob: {DateOfBirth}" +
-                    $"\nAdult: {person.IsAdult}\nZodiacSign: {person.SunSign}\nChineseSign: {person.ChineseSign}\nBirthday: {person.IsBirthday} ");
+                        $"Name: {person.FirstName},\n Surname: {person.LastName},\n Email: {person.Email},\n DateOfBirth: {person.DateOfBirth.ToShortDateString()}," +
+                        $"\n IsAdult: {person.IsAdult},\n ZodiacSign: {person.SunSign},\n ChineseSign: {person.ChineseSign},\n IsBirthday: {person.IsBirthday} ");
                 });
             }
             catch (Exception ex)
