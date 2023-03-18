@@ -54,8 +54,8 @@ namespace KMA.Lab02.Kucherenko.ViewModels
                 {
                     Thread.Sleep(3000);
                     MessageBox.Show(
-                        $"Name: {person.FirstName},\n Surname: {person.LastName},\n Email: {person.Email},\n DateOfBirth: {person.DateOfBirth}," +
-                        $"\n IsAdult: {person.IsAdult},\n ZodiacSign: {person.SunSign},\n ChineseSign: {person.ChineseSign},\n IsBirthday: {person.IsBirthday} ");
+                    $"Your data has been proceeded!\n \nName: {FirstName}\nSurname: {LastName}\nEmail: {Email}\nDob: {DateOfBirth}" +
+                    $"\nAdult: {person.IsAdult}\nZodiacSign: {person.SunSign}\nChineseSign: {person.ChineseSign}\nBirthday: {person.IsBirthday} ");
                 });
             }
             catch (Exception ex)
