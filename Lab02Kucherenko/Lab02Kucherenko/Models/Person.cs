@@ -8,9 +8,9 @@ namespace KMA.Lab02.Kucherenko.Models
     {
         #region Fields
 
-        private String _firstName;
-        private String _lastName;
-        private String _email;
+        private string _firstName;
+        private string _lastName;
+        private string _email;
         private DateTime _dob;
 
         #endregion
@@ -30,7 +30,7 @@ namespace KMA.Lab02.Kucherenko.Models
         {
         }
 
-        public Person(String firstName, String lastName, DateTime dob) : this(firstName, lastName, null, dob)
+        public Person(String firstName, String lastName, DateTime dob) : this(firstName, lastName, "", dob)
         {
         }
 
