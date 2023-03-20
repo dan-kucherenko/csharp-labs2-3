@@ -1,4 +1,5 @@
-﻿using KMA.Lab02.Kucherenko.ViewModels;
+﻿using System;
+using KMA.Lab02.Kucherenko.ViewModels;
 using System.Windows.Controls;
 
 namespace KMA.Lab02.Kucherenko.Views
@@ -10,10 +11,10 @@ namespace KMA.Lab02.Kucherenko.Views
     {
         private FormViewModel _viewModel;
 
-        public FormView()
+        public FormView(Action gotoResultView)
         {
             InitializeComponent();
-            DataContext = _viewModel = new FormViewModel();
+            DataContext = _viewModel = new FormViewModel(gotoResultView);
         }
     }
 }

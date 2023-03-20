@@ -18,22 +18,25 @@
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top" Margin="10, 5,0,0" />
         <TextBox Grid.Row="0" Width="380" Height="25" HorizontalAlignment="Center" VerticalAlignment="Top"
-                 Margin="10, 30, 10,0" FontSize="16" Text="{Binding FirstName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
+                 Margin="10, 30, 10,0" FontSize="16"
+                 Text="{Binding FirstName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
         <TextBlock Grid.Row="1" Text="Last Name" FontFamily="Times New Roman" FontWeight="DemiBold" FontSize="18"
                    HorizontalAlignment="Left"
-                   VerticalAlignment="Top" Margin="10, 5,0,0"  />
+                   VerticalAlignment="Top" Margin="10, 5,0,0" />
         <TextBox Grid.Row="1" Width="380" Height="25" HorizontalAlignment="Center" VerticalAlignment="Top"
-                 Margin="10, 30, 10,0" FontSize="16" Text="{Binding LastName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Margin="10, 30, 10,0" FontSize="16"
+                 Text="{Binding LastName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
         <TextBlock Grid.Row="2" Text="Email" FontFamily="Times New Roman" FontWeight="DemiBold" FontSize="18"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top" Margin="10, 5,0,0" />
         <TextBox Grid.Row="2" Width="380" Height="25" HorizontalAlignment="Center" VerticalAlignment="Top"
-                 Margin="10, 30, 10,0" FontSize="16" Text="{Binding Email, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Margin="10, 30, 10,0" FontSize="16"
+                 Text="{Binding Email, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
         <TextBlock Grid.Row="3" Text="Date of birth" FontFamily="Times New Roman" FontWeight="DemiBold" FontSize="18"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top" Margin="10, 5,0,0" />
         <DatePicker Grid.Row="3" Width="380" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top"
-                    Margin="10, 30, 10,0" FontSize="16" SelectedDate="{Binding DateOfBirth, Mode=TwoWay}"/>
+                    Margin="10, 30, 10,0" FontSize="16" SelectedDate="{Binding DateOfBirth, Mode=TwoWay}" />
         <Button Grid.Row="4" Content="Proceed" Width="200" Height="35"
                 VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,15"
                 Background="DarkCyan" BorderBrush="Black" FontWeight="DemiBold" FontSize="18"

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using KMA.Lab02.Kucherenko.Views;
+using System.Windows;
 
 namespace KMA.Lab02.Kucherenko
 {
@@ -10,6 +11,17 @@ namespace KMA.Lab02.Kucherenko
         public MainWindow()
         {
             InitializeComponent();
+            GoToFormView();
+        }
+
+        public void GoToResultView()
+        {
+            Content = new ResultView(GoToFormView);
+        }
+
+        public void GoToFormView()
+        {
+            Content = new FormView(GoToResultView);
         }
     }
 }
