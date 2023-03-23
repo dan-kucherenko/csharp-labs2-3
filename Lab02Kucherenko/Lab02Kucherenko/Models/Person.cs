@@ -1,6 +1,8 @@
-﻿using System;
-using System.Windows;
+﻿using KMA.Lab02.Kucherenko.Tools.Exceptions;
 using KMA.Lab02.Kucherenko.Tools.Signs;
+using KMA.Lab02.Kucherenko.Tools.Validators;
+using System;
+using System.Windows;
 
 namespace KMA.Lab02.Kucherenko.Models
 {
@@ -11,7 +13,7 @@ namespace KMA.Lab02.Kucherenko.Models
         private string _firstName;
         private string _lastName;
         private string _email;
-        private DateTime _dob;
+        private DateTime _dob = DateTime.Now;
         private readonly bool _isAdult;
         private readonly SunSign _sunSign;
         private readonly ChineseSign _chineseSign;
@@ -23,11 +25,21 @@ namespace KMA.Lab02.Kucherenko.Models
 
         public Person(String firstName, String lastName, String email, DateTime dob)
         {
+            try
+            {
+                ValidateInput(firstName, lastName, email, dob);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return;
+            }
+
             _firstName = firstName;
             _lastName = lastName;
             _email = email;
             _dob = dob;
-            _isAdult = CalculateAge() >= 18;
+            _isAdult = CalculateAge(_dob) >= 18;
             _sunSign = GetZodiacSign();
             _chineseSign = GetChineseZodiacSigns();
             _isBirthday = CalculateIsBirthday();
@@ -79,33 +91,31 @@ namespace KMA.Lab02.Kucherenko.Models
 
         #region CalculateAge/Birthday
 
-        private int CalculateAge()
+        private int CalculateAge(DateTime dob)
         {
-            var age = DateTime.Now.Year - DateOfBirth.Year;
-            if (DateTime.Now.Month < DateOfBirth.Month ||
-                (DateTime.Now.Month == DateOfBirth.Month && DateTime.Now.Day < DateOfBirth.Day))
+            var age = DateTime.Now.Year - dob.Year;
+            if (DateTime.Now.Month < dob.Month ||
+                (DateTime.Now.Month == dob.Month && DateTime.Now.Day < dob.Day))
                 age--;
+            if (dob.CompareTo(DateTime.Now) > 0)
+                return -1;
             return age;
         }
 
         private bool CalculateIsBirthday()
         {
-            if (!AgeIsLessThenZero(CalculateAge()))
-                MessageBox.Show("Invalid dob: you can't be unborn");
-            else if(!AgeIsMoreThenPossible(CalculateAge()))
-                MessageBox.Show("Invalid dob: you can't be more than 135 y.o");
             bool isBirthday = DateTime.Now.Day == DateOfBirth.Day && DateTime.Now.Month == DateOfBirth.Month;
             if (isBirthday)
                 MessageBox.Show("Happy birthday!");
             return isBirthday;
         }
 
-        private bool AgeIsLessThenZero(int age)
+        private bool AgeIsMoreThanZero(int age)
         {
             return age >= 0;
         }
 
-        private bool AgeIsMoreThenPossible(int age)
+        private bool AgeIsLessThanPossible(int age)
         {
             return age < 135;
         }
@@ -154,5 +164,33 @@ namespace KMA.Lab02.Kucherenko.Models
         }
 
         #endregion
+
+        public bool IsAnyFieldNull()
+        {
+            if (!String.IsNullOrWhiteSpace(FirstName) ||
+                !String.IsNullOrWhiteSpace(LastName) ||
+                !String.IsNullOrWhiteSpace(Email)
+               )
+                return false;
+            return true;
+        }
+
+        private void ValidateInput(string firstName, string lastName, string email, DateTime dob)
+        {
+            if (String.IsNullOrWhiteSpace(firstName) ||
+                String.IsNullOrWhiteSpace(lastName) ||
+                !NameValidator.IsValidName(firstName) ||
+                !NameValidator.IsValidName(lastName))
+                throw new InvalidPersonNameException();
+
+            if (String.IsNullOrWhiteSpace(email) || !EmailValidator.IsValidEmail(email))
+                throw new InvalidEmailException();
+
+            var age = CalculateAge(dob);
+            if (!AgeIsMoreThanZero(age))
+                throw new FutureDobException();
+            if (!AgeIsLessThanPossible(age))
+                throw new TooOldDobException();
+        }
     }
 }
