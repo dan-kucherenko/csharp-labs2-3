@@ -1,6 +1,6 @@
-﻿using KMA.Lab02.Kucherenko.Tools;
-using System;
+﻿using System;
 using System.Windows;
+using KMA.Lab02.Kucherenko.Tools.Signs;
 
 namespace KMA.Lab02.Kucherenko.Models
 {
@@ -12,6 +12,10 @@ namespace KMA.Lab02.Kucherenko.Models
         private string _lastName;
         private string _email;
         private DateTime _dob;
+        private readonly bool _isAdult;
+        private readonly SunSign _sunSign;
+        private readonly ChineseSign _chineseSign;
+        private readonly bool _isBirthday;
 
         #endregion
 
@@ -23,6 +27,10 @@ namespace KMA.Lab02.Kucherenko.Models
             _lastName = lastName;
             _email = email;
             _dob = dob;
+            _isAdult = CalculateAge() >= 18;
+            _sunSign = GetZodiacSign();
+            _chineseSign = GetChineseZodiacSigns();
+            _isBirthday = CalculateIsBirthday();
         }
 
         public Person(String firstName, String lastName, String email) : this(firstName, lastName, email,
@@ -62,10 +70,10 @@ namespace KMA.Lab02.Kucherenko.Models
             private set { _dob = value; }
         }
 
-        public bool IsAdult => CalculateAge() >= 18;
-        public SunSign SunSign => GetZodiacSign();
-        public ChineseSign ChineseSign => GetChineseZodiacSigns();
-        public bool IsBirthday => CalculateIsBirthday();
+        public bool IsAdult => _isAdult;
+        public SunSign SunSign => _sunSign;
+        public ChineseSign ChineseSign => _chineseSign;
+        public bool IsBirthday => _isBirthday;
 
         #endregion
 
@@ -82,17 +90,24 @@ namespace KMA.Lab02.Kucherenko.Models
 
         private bool CalculateIsBirthday()
         {
-            if (!ValidAge(CalculateAge()))
-                MessageBox.Show("Invalid date of birth");
+            if (!AgeIsLessThenZero(CalculateAge()))
+                MessageBox.Show("Invalid dob: you can't be unborn");
+            else if(!AgeIsMoreThenPossible(CalculateAge()))
+                MessageBox.Show("Invalid dob: you can't be more than 135 y.o");
             bool isBirthday = DateTime.Now.Day == DateOfBirth.Day && DateTime.Now.Month == DateOfBirth.Month;
             if (isBirthday)
                 MessageBox.Show("Happy birthday!");
             return isBirthday;
         }
 
-        private bool ValidAge(int age)
+        private bool AgeIsLessThenZero(int age)
         {
-            return age is >= 0 and < 135;
+            return age >= 0;
+        }
+
+        private bool AgeIsMoreThenPossible(int age)
+        {
+            return age < 135;
         }
 
         #endregion
