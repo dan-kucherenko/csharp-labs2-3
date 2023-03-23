@@ -1,4 +1,4 @@
-﻿namespace KMA.Lab02.Kucherenko.Tools
+﻿namespace KMA.Lab02.Kucherenko.Tools.Signs
 {
     internal enum ChineseSign
     {

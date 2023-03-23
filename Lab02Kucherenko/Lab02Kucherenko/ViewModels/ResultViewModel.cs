@@ -1,6 +1,7 @@
 ﻿using KMA.Lab02.Kucherenko.Models;
-using KMA.Lab02.Kucherenko.Tools;
 using System;
+using KMA.Lab02.Kucherenko.Tools;
+using KMA.Lab02.Kucherenko.Tools.Signs;
 
 namespace KMA.Lab02.Kucherenko.ViewModels
 {
