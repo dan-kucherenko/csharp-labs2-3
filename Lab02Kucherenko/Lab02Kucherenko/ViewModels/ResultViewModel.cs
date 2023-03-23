@@ -7,15 +7,21 @@ namespace KMA.Lab02.Kucherenko.ViewModels
 {
     internal class ResultViewModel
     {
+        #region Fields
+
         private Action _gotoFormView;
         private RelayCommand<object> _returnCommand;
         private readonly PersonService _personService;
+
+        #endregion
 
         public ResultViewModel(Action gotoFormView)
         {
             _gotoFormView = gotoFormView;
             _personService = new PersonService();
         }
+
+        #region Properties
 
         public Person Person => _personService.Person;
 
@@ -36,6 +42,9 @@ namespace KMA.Lab02.Kucherenko.ViewModels
         public bool IsBirthday => Person.IsBirthday;
 
         public RelayCommand<object> ReturnCommand => _returnCommand ??= new RelayCommand<object>(_ => ReturnToForm());
+
+        #endregion
+
         public void ReturnToForm()
         {
             _gotoFormView?.Invoke();

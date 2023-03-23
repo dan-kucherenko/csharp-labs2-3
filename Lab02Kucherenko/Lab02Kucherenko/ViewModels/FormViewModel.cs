@@ -12,7 +12,7 @@ namespace KMA.Lab02.Kucherenko.ViewModels
     internal class FormViewModel : INotifyPropertyChanged
     {
         #region Fields
-        
+
         private bool _isEnabled = true;
         private RelayCommand<object> _proceedCommand;
         private Action _gotoResultView;
@@ -54,13 +54,15 @@ namespace KMA.Lab02.Kucherenko.ViewModels
             IsEnabled = false;
             PersonService ps = new PersonService();
             Person person = new Person(FirstName, LastName, Email, DateOfBirth);
+            if (person.IsAnyFieldNull())
+            {
+                IsEnabled = true;
+                return;
+            }
             ps.SavePerson(person);
             try
             {
-                await Task.Run(() =>
-                {
-                    Thread.Sleep(3000);
-                });
+                await Task.Run(() => { Thread.Sleep(3000); });
                 _gotoResultView?.Invoke();
             }
             catch (Exception ex)
